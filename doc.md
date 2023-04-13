@@ -22,7 +22,7 @@
                 + "ignoreHTTPSErrors" : true 
                         -> bỏ qua các lỗi bảo mật
             + log ("khong tao duoc : " + error)
-        + return browser 
+        + return startBrowser 
 
 
 +  scrapeController 
@@ -63,3 +63,16 @@
             -> vì ở scaper lấy 2 gtri 
     + try{...}
         + let categories = scrapers.scrapeCategory(browser , url)
+
+        + const dataCategory = await page.$$eval("#navbar-menu > ul > li" , els =>{...} )
+                --> lấy data trong dataCategory
+            +  dataCategory = els.map(el => return{...} )
+                + category : el.querySelector("a").innerText,
+                + link : el.querySelector("a").href
+            + return dataCategory
+
+        + console.log(dataCategory)
+        
+        + await page.close()
+                --> tắt trình duyệt
+
